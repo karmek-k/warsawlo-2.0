@@ -12,8 +12,9 @@ import SchoolContact from '../components/sections/SchoolPage/SchoolContact';
 import { useHighSchoolClasses } from '../api/highschoolClasses';
 import { ErrorInfo } from '../components/Info';
 import { useFavouriteSchools } from '../hooks/useFavouriteSchools';
+import { Source, sourceMap } from '../utils/source';
 
-const SchoolPage = (props: RouteComponentProps<{ schoolID: string }>) => {
+const SchoolPage = (props: RouteComponentProps<{ schoolID: string, source?: Source }>) => {
   const isSchoolIdValid =
     props.schoolID && !Number.isNaN(props.schoolID as any);
 
@@ -36,7 +37,7 @@ const SchoolPage = (props: RouteComponentProps<{ schoolID: string }>) => {
         <Container className={!school ? 'loading' : ''}>
           <Breadcrumbs
             steps={[
-              ['Wyszukiwarka szkół', '/schools'],
+              [sourceMap.get(props.source ?? Source.SchoolSearchPage)],
               [school ? school.school_name : 'Szkoła'],
             ]}
           />
